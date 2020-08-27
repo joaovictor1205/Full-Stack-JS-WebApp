@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const TaskSchema = new Schema({
 
-    macAdress: {
+    macAddress: {
         type: String,
         required: true,
     },

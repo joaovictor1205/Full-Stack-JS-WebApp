@@ -2,10 +2,11 @@ const express = require('express');
 require('dotenv/config');
 
 const server = express();
+server.use(express.json());
 
-server.get('/', (req, res) => {
-    res.send('FUCK YOU');
-})
+// ROUTER
+const taskRouter = require('./routes/TaskRouter');
+server.use('/task', taskRouter);
 
 server.listen(process.env.PORT, () => {
     console.log(`Server rodando na porta ${process.env.PORT}`)
