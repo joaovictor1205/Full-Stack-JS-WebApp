@@ -16,5 +16,6 @@ router.get('/filter/date', MacAdressMiddleware, TaskController.late);
 router.get('/filter/today', MacAdressMiddleware, TaskController.today);
 router.get('/filter/week', MacAdressMiddleware, TaskController.week);
 router.get('/filter/month', MacAdressMiddleware, TaskController.month);
+router.get('/filter/year', MacAdressMiddleware, TaskController.year);
 
 module.exports = router;

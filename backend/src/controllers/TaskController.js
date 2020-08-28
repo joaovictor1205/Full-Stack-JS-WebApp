@@ -1,7 +1,7 @@
 const TaskModel = require('../models/TaskModel');
 
 const current_date = new Date();
-const { startOfDay, endOfDay, startOfWeek, endOfWeek, startOfMonth, endOfMonth } = require('date-fns');
+const { startOfDay, endOfDay, startOfWeek, endOfWeek, startOfMonth, endOfMonth, startOfYear, endOfYear } = require('date-fns');
 
 class TaskController {
     async create(req,res){
@@ -122,6 +122,20 @@ class TaskController {
     async month(req, res){
         await TaskModel.find({
             'when': {'$gte': startOfMonth(current_date), '$lte': endOfMonth(current_date)},
+            'macAddress': {'$in': req.body.macAddress},  
+        })
+        .sort('when')
+        .then(response => {
+            return res.status(200).json(response)
+        })
+        .catch(error => {
+            return res.status(500).json(error);
+        });
+    }
+
+    async year(req, res){
+        await TaskModel.find({
+            'when': {'$gte': startOfYear(current_date), '$lte': endOfYear(current_date)},
             'macAddress': {'$in': req.body.macAddress},  
         })
         .sort('when')
