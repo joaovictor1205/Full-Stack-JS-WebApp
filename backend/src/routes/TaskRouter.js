@@ -10,5 +10,6 @@ router.put('/:id', TaskMiddleware, TaskController.update);
 router.get('/filter/all', MacAdressMiddleware,TaskController.all);
 router.get('/:id', TaskController.show);
 router.delete('/:id', TaskController.delete);
+router.put('/:id/:done', TaskController.done);
 
 module.exports = router;
