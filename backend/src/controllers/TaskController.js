@@ -1,6 +1,7 @@
 const TaskModel = require('../models/TaskModel');
 
 const current_date = new Date();
+const { startOfDay, endOfDay, startOfWeek, endOfWeek, startOfMonth, endOfMonth } = require('date-fns');
 
 class TaskController {
     async create(req,res){
@@ -80,6 +81,48 @@ class TaskController {
         await TaskModel.find({
             'when': {'$lt': current_date},
             'macAddress': {'$in': req.body.macAddress},
+        })
+        .sort('when')
+        .then(response => {
+            return res.status(200).json(response)
+        })
+        .catch(error => {
+            return res.status(500).json(error);
+        });
+    }
+
+    async today(req, res){
+        await TaskModel.find({
+            'when': {'$gte': startOfDay(current_date), '$lte': endOfDay(current_date)},
+            'macAddress': {'$in': req.body.macAddress},  
+        })
+        .sort('when')
+        .then(response => {
+            return res.status(200).json(response)
+        })
+        .catch(error => {
+            return res.status(500).json(error);
+        });
+    }
+
+    async week(req, res){
+        await TaskModel.find({
+            'when': {'$gte': startOfWeek(current_date), '$lte': endOfWeek(current_date)},
+            'macAddress': {'$in': req.body.macAddress},  
+        })
+        .sort('when')
+        .then(response => {
+            return res.status(200).json(response)
+        })
+        .catch(error => {
+            return res.status(500).json(error);
+        });
+    }
+
+    async month(req, res){
+        await TaskModel.find({
+            'when': {'$gte': startOfMonth(current_date), '$lte': endOfMonth(current_date)},
+            'macAddress': {'$in': req.body.macAddress},  
         })
         .sort('when')
         .then(response => {
