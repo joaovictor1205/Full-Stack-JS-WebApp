@@ -28,7 +28,7 @@ class TaskController {
     }
 
     async all(req, res){
-        await TaskModel.find({ 'macAddress': { '$in': req.body.macAddress } })
+        await TaskModel.find({ 'macAddress': { '$in': req.params.macAddress } })
             .sort('when')
             .then(response => {
                 return res.status(200).json(response);
@@ -80,7 +80,7 @@ class TaskController {
     async late(req, res){
         await TaskModel.find({
             'when': {'$lt': current_date},
-            'macAddress': {'$in': req.body.macAddress},
+            'macAddress': {'$in': req.params.macAddress},
         })
         .sort('when')
         .then(response => {
