@@ -5,6 +5,7 @@ import * as S from './styles';
 import Header from '../../components/Header/index';
 import Footer from '../../components/Footer/index';
 import FilterCard from '../../components/FilterCard/index';
+import TaskCard from '../../components/TaskCard/index';
 
 function Home() {
 
@@ -36,6 +37,23 @@ function Home() {
           <FilterCard title="Ano"     actived={filterActived == 'year'} />
         </button>
       </S.FilterArea>
+
+      <S.Title>
+        <h3> TAREFAS </h3>
+      </S.Title>
+
+      <S.Content>
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+        <TaskCard />
+      </S.Content>
 
       <Footer />
     </S.Container>
