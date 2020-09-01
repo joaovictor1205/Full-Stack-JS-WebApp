@@ -11,7 +11,7 @@ router.delete('/:id', TaskController.delete);
 router.put('/:id/:done', TaskController.done);
 
 router.get('/filter/all/:macAddress',TaskController.all);
-router.get('/filter/date/:macAddress', TaskController.late);
+router.get('/filter/late/:macAddress', TaskController.late);
 router.get('/filter/today/:macAddress', TaskController.today);
 router.get('/filter/week/:macAddress', TaskController.week);
 router.get('/filter/month/:macAddress', TaskController.month);

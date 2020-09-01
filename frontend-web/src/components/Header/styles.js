@@ -31,7 +31,16 @@ export const RightSide = styled.div`
     align-items: center;
     justify-content: flex-end;
 
-    a{
+    button{
+        background:none;
+        border:none;
+    }
+
+    button:focus{
+        outline:0px
+    }
+
+    a, button{
         color:white;
         font-weight: bold;
         text-decoration: none;
@@ -52,7 +61,7 @@ export const RightSide = styled.div`
         span{
             background: white;
             color: #EE6B26;
-            padding: 3px 7px;
+            padding: 3px 5px 3px 3px;
             border-radius: 50%;
             position: relative;
             top: -20px;
