@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import * as S from './styles';
 import { format } from 'date-fns';
 import api from '../../services/api';
@@ -21,6 +22,7 @@ function Task(props) {
     const [ date, setDate ] = useState();
     const [ hour, setHour ] = useState();
     const [ macAddress, setMacAddress ] = useState('11:11:11:11:11:11');
+    const [ redirect, setRedirect ] = useState(false);
 
     async function lateVerify(){
         await api.get(`task/filter/late/11:11:11:11:11:11`)
@@ -32,24 +34,37 @@ function Task(props) {
     async function loadTaskDetail(){
         await api.get(`task/${props.match.params.id}`)
             .then( response => {
-                setType(response.data.type)
-                setTitle(response.data.title)
-                setDescription(response.data.description)
-                setDate(format(new Date(response.data.when), 'yyyy-MM-dd'))
-                setHour(format(new Date(response.data.when), 'HH:mm'))
-            })
+                setType(response.data.type);
+                setTitle(response.data.title);
+                setDescription(response.data.description);
+                setDate(format(new Date(response.data.when), 'yyyy-MM-dd'));
+                setHour(format(new Date(response.data.when), 'HH:mm'));
+            });
     }
 
     async function save(){
-        await api.post('/task', {
-            macAddress,
-            type,
-            title,
-            description,
-            when: `${date}T${hour}:00.000`
-        }).then( () =>
-            alert('Tarefa cadastrada')
-        );
+        if (props.match.params.id){
+            await api.put(`task/${props.match.params.id}`, {
+                macAddress,
+                type,
+                done,
+                title,
+                description,
+                when: `${date}T${hour}:00.000`
+            }).then( () =>
+                setRedirect(true)
+            );
+        }else {
+            await api.post('/task', {
+                macAddress,
+                type,
+                title,
+                description,
+                when: `${date}T${hour}:00.000`
+            }).then( () =>
+                setRedirect(true)
+            );
+        }
     }
 
     useEffect( () => {
@@ -59,6 +74,7 @@ function Task(props) {
 
     return (
         <S.Container>
+            { redirect && <Redirect to="/" /> }
             <Header lateCount={ lateCount }/>
 
             <S.Form>
