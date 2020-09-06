@@ -82,5 +82,6 @@ export const RightSide = styled.div`
     button{
         font-size:16px;
         cursor:pointer;
+        font-weight:bold;
     }
 `

@@ -22,7 +22,7 @@ function Task(props) {
     const [ description, setDescription ] = useState();
     const [ date, setDate ] = useState();
     const [ hour, setHour ] = useState();
-    const [ macAddress, setMacAddress ] = useState('11:11:11:11:11:11');
+    const [ macAddress, setMacAddress ] = useState(isConnected);
     const [ redirect, setRedirect ] = useState(false);
 
     async function lateVerify(){

@@ -13,9 +13,13 @@ function QrCode() {
     const [ redirect, setRedirect ] = useState(false);
 
     async function saveMac(){
-        await localStorage.setItem('@ToDoAPP/mac_address', mac);
-        setRedirect(true);
-        window.location.reload();
+        if(!mac){
+            alert('Informe o Mac Address');
+        }else{
+            await localStorage.setItem('@ToDoAPP/mac_address', mac);
+            setRedirect(true);
+            window.location.reload();
+        }
     }
 
     return (
