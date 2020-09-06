@@ -47,15 +47,15 @@ function Task(props) {
 
         // Validação dos dados
         if(!title){
-            return alert('Informar o título')
+            return alert('Informar o título');
         } else if (!description){
-            return alert('Informar a descrição')
+            return alert('Informar a descrição');
         } else if (!type){
-            return alert('Informar o tipo')
+            return alert('Informar o tipo');
         } else if (!date){
-            return alert('Informar a data')
+            return alert('Informar a data');
         } else if (!hour){
-            return alert('Informar a hora')
+            return alert('Informar a hora');
         }
 
         if (props.match.params.id){
@@ -79,6 +79,15 @@ function Task(props) {
             }).then( () =>
                 setRedirect(true)
             );
+        }
+    }
+
+    async function remove(){
+        const res = window.confirm('Tem certeza?');
+
+        if(res == true){
+            await api.delete(`task/${props.match.params.id}`)
+            .then( () => setRedirect(true));
         }
     }
 
@@ -155,7 +164,7 @@ function Task(props) {
                         <span>CONCLUÍDO</span>
                     </div>
 
-                    <button type="button">EXCLUIR</button>
+                { props.match.params.id && <button type="button" onClick={remove}>EXCLUIR</button> }
                 </S.Options>
 
                 <S.Save>
