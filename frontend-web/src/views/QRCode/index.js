@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import * as S from './styles';
 import Qr from 'qrcode.react';
 
@@ -8,9 +9,19 @@ import Footer from '../../components/Footer/index';
 
 function QrCode() {
 
+    const [ mac, setMac ] = useState();
+    const [ redirect, setRedirect ] = useState(false);
+
+    async function saveMac(){
+        await localStorage.setItem('@ToDoAPP/mac_address', mac);
+        setRedirect(true);
+        window.location.reload();
+    }
+
     return (
 
         <S.Container>
+            { redirect && <Redirect to="/" /> }
             <Header />
 
             <S.Content>
@@ -23,8 +34,8 @@ function QrCode() {
 
             <S.ValidationCode>
                 <span> Digite o código que apareceu no seu celular </span>
-                <input type="text" />
-                <button type="button"> Sincronizar </button>
+                <input type="text" onChange={ e => setMac(e.target.value) } value={ mac } />
+                <button type="button" onClick={ saveMac }> Sincronizar </button>
             </S.ValidationCode>
 
             <Footer />

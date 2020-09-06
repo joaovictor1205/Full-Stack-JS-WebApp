@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import * as S from './styles';
 import { format } from 'date-fns';
 import api from '../../services/api';
+import isConnected from '../../utils/isConnected';
 
 // ICONS IMPORT
 import TypeIcons from '../../utils/typeIcons';
@@ -92,6 +93,9 @@ function Task(props) {
     }
 
     useEffect( () => {
+        if(!isConnected){
+            setRedirect(true);
+        }
         lateVerify();
         loadTaskDetail();
     }, []);
