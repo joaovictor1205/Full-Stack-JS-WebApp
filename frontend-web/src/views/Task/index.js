@@ -36,6 +36,7 @@ function Task(props) {
             .then( response => {
                 setType(response.data.type);
                 setTitle(response.data.title);
+                setDone(response.data.done);
                 setDescription(response.data.description);
                 setDate(format(new Date(response.data.when), 'yyyy-MM-dd'));
                 setHour(format(new Date(response.data.when), 'HH:mm'));
@@ -43,6 +44,20 @@ function Task(props) {
     }
 
     async function save(){
+
+        // Validação dos dados
+        if(!title){
+            return alert('Informar o título')
+        } else if (!description){
+            return alert('Informar a descrição')
+        } else if (!type){
+            return alert('Informar o tipo')
+        } else if (!date){
+            return alert('Informar a data')
+        } else if (!hour){
+            return alert('Informar a hora')
+        }
+
         if (props.match.params.id){
             await api.put(`task/${props.match.params.id}`, {
                 macAddress,
