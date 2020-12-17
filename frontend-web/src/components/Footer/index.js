@@ -5,7 +5,7 @@ import * as S from './styles';
 function Footer(){
     return (
         <S.Container>
-            <span> To Do - Organizando sua vida! </span>
+            <span> Skedule! Seu app de agendamentos </span>
         </S.Container>
     );
 }

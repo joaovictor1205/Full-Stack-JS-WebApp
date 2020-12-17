@@ -16,7 +16,7 @@ function Header(props){
     return(
         <S.Container>
             <S.LeftSide>
-                <img src={ logo } alt="Logo" />
+                <p>Skedule</p>
             </S.LeftSide>
 
             <S.RightSide>

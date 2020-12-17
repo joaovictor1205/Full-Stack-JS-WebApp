@@ -21,6 +21,11 @@ export const LeftSide = styled.div`
         width: 100px;
         height: 40px;
     }
+
+    p {
+        color: white;
+        font-size: 1.5rem;
+    }
 `
 
 export const RightSide = styled.div`
