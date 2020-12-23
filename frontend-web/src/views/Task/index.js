@@ -124,7 +124,7 @@ function Task(props) {
                     <span> Título </span>
                     <input
                         type="text"
-                        placeholder="Título da tarefa"
+                        placeholder="Título"
                         onChange={ e => setTitle(e.target.value) }
                         value={ title }
                     />
